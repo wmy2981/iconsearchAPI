@@ -7,6 +7,7 @@
 ![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
 ![零依赖](https://img.shields.io/badge/Composer-无-lightgrey)
 ![无数据库](https://img.shields.io/badge/数据库-无-lightgrey)
 
@@ -32,6 +33,7 @@
 - **🔐 Token 鉴权** — Bearer header 或 query 参数，灵活配置跳过认证
 - **⚡ 加速链接** — 可配置 GitHub 资源加速规则，国内访问友好
 - **📝 日志系统** — 按日期轮转，支持级别过滤，Token 自动脱敏
+- **🐳 Docker 部署** — Docker Compose 一键启动，卷映射持久化配置与数据
 - **📐 索引构建** — 扫描本地图标目录生成 JSON 索引，轻松扩展新来源
 
 ---
@@ -78,6 +80,15 @@ iconsearch search chrome --json
 # 查看状态
 iconsearch status
 ```
+
+### Docker 一键部署
+
+```bash
+docker compose build    # 构建镜像 iconsearchAPI
+docker compose up -d    # 启动容器（端口 8080）
+```
+
+容器化运行，配置、数据、日志通过卷持久化，修改 `config.json` 后重启容器即可生效。
 
 ---
 
@@ -242,6 +253,9 @@ IconSearchAPI/
 │   ├── iconsearch.py       # CLI 主程序
 │   ├── build_index.py      # 索引构建工具
 │   └── requirements.txt
+├── Dockerfile              # Docker 镜像构建文件
+├── docker-compose.yml      # Docker Compose 编排配置
+├── .dockerignore           # Docker 构建排除规则
 ├── LICENSE                 # MIT License
 └── README.md
 ```
@@ -308,6 +322,7 @@ python cli/build_index.py <图标目录> --domain <域名> [--ext .png,.svg] [--
 | 后端 | **PHP 8.3+**（`str_starts_with`、`match` 等新语法） |
 | 前端 | 纯 **HTML + CSS + JS**，单文件，无框架 |
 | CLI | **Python 3.10+**，仅依赖 `requests` |
+| 部署 | **Docker**（Alpine 镜像，Compose 编排） |
 | 存储 | 文件系统（JSON + PHP serialize 缓存） |
 | 数据库 | ❌ 无 |
 

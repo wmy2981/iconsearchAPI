@@ -1,0 +1,20 @@
+# Git
+.git
+.gitignore
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/
+
+# 运行时自动生成（持久化由 volume 处理）
+cache/
+logs/
+
+# Python 缓存
+__pycache__/
+*.pyc

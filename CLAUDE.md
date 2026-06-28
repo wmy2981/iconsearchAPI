@@ -34,21 +34,47 @@ IconSearchAPI/
     ├── iconsearch.py       # CLI 主程序（搜索 API）
     ├── build_index.py      # 索引构建工具（扫描目录生成 JSON）
     └── requirements.txt    # Python 依赖
+├── Dockerfile              # Docker 镜像构建文件
+├── docker-compose.yml      # Docker Compose 编排配置
+├── .dockerignore           # Docker 构建排除规则
 ```
 
 ## 技术栈
 
 - PHP 8.3+（使用 `str_starts_with`、`match` 等新语法）
 - Python 3.10+（CLI 客户端）
+- Docker + Docker Compose（容器化部署）
 - 无框架，纯原生 PHP / Python
 - 无数据库，纯文件读取
 - PHP 无 Composer 依赖；Python 依赖 `requests`
 
 ## 运行方式
 
+### 本地运行（PHP 内置服务器）
+
 ```bash
 php -S 127.0.0.1:8080
 ```
+
+### Docker 运行
+
+```bash
+docker compose up -d
+# 打开 http://localhost:8080
+```
+
+### Docker 卷映射
+
+```
+宿主机                    容器内
+./config.json  ──:ro──→  /app/config.json    (配置)
+./sources/     ──:ro──→  /app/sources/       (图标索引)
+./icons/       ──:ro──→  /app/icons/         (图标文件)
+cache_data     ──────→  /app/cache/          (文件缓存, named volume)
+logs_data      ──────→  /app/logs/           (日志, named volume)
+```
+
+修改 `config.json` 后重启容器即可生效，无需重新构建镜像。
 
 ## API 接口
 

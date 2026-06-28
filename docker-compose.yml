@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  iconsearch:
+    build: .
+    image: iconsearchAPI
+    container_name: iconsearchAPI
+    ports:
+      - "8080:8080"
+    volumes:
+      # 配置文件（外部覆盖）
+      - ./config.json:/app/config.json:ro
+      # 图标来源数据
+      - ./sources:/app/sources:ro
+      # 图标本地文件（供相对路径引用）
+      - ./icons:/app/icons:ro
+      # 运行时可写目录
+      - cache_data:/app/cache
+      - logs_data:/app/logs
+    restart: unless-stopped
+
+volumes:
+  cache_data:
+  logs_data:
