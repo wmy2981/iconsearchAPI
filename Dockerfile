@@ -7,9 +7,6 @@ LABEL org.opencontainers.image.title="IconSearchAPI"
 LABEL org.opencontainers.image.description="PHP icon search engine"
 LABEL org.opencontainers.image.licenses="MIT"
 
-# 安装 Python CLI 运行时依赖
-RUN apk add --no-cache python3 py3-pip
-
 WORKDIR /app
 
 # 复制项目核心代码
