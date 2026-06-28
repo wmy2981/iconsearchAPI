@@ -460,3 +460,85 @@ python cli/build_index.py /path/to/icon-repo -d https://example.com/icons -o my_
 # 使用本地路径
 python cli/build_index.py /path/to/icon-repo -d /icons
 ```
+
+## 版本管理
+
+### 版本号规则（SemVer）
+
+遵循语义化版本（`MAJOR.MINOR.PATCH`）：
+
+| 变更类型 | 版本升级 | 说明 |
+|---------|---------|------|
+| API 不兼容变更 | MAJOR +1 | 请求/响应格式、认证方式等破坏性改动 |
+| 功能新增（向后兼容） | MINOR +1 | 新 API 端点、新来源格式、新 CLI 命令 |
+| Bug 修复（向后兼容） | PATCH +1 | 逻辑修复、性能优化、文档修正 |
+
+- 当前版本：**v1.0.0**（首次稳定发布）
+- 版本号记录在项目根目录的 `VERSION` 文件中
+- Git tag 以 `v` 开头（如 `v1.0.0`）
+- 每次发布需同时：更新 `VERSION` 文件 → 生成 changelog → 打 tag
+- 预发布版本号示例：`v1.1.0-alpha.1`、`v2.0.0-rc.1`
+
+### 发布流程
+
+```bash
+# 1. 更新 VERSION 文件
+echo -n "1.1.0" > VERSION
+
+# 2. 提交
+git add VERSION
+git commit -m "chore: bump version to 1.1.0"
+
+# 3. 打标签
+git tag -a v1.1.0 -m "v1.1.0"
+
+# 4. 推送
+git push origin master
+git push origin v1.1.0
+```
+
+## 仓库信息
+
+- **远程仓库**: `git@github.com:wmy2981/iconsearchAPI.git`
+- **默认分支**: `master`
+- **开源许可**: MIT（`LICENSE` 文件）
+- **自述文件**: `README.md`
+
+## Git 工作流
+
+### 分支策略
+
+- `master` — 稳定发布分支，始终保持可部署状态
+- 功能开发直接在 master 上进行（单人项目），复杂功能可临时创建 feat/* 分支
+- Tag 标记所有正式版本
+
+### 提交信息规范
+
+采用 [Conventional Commits](https://www.conventionalcommits.org/) 风格：
+
+```
+<类型>: <简短描述>
+
+<详细说明（可选）>
+```
+
+| 类型 | 使用场景 |
+|------|---------|
+| `feat` | 新功能 |
+| `fix` | Bug 修复 |
+| `docs` | 文档变更 |
+| `chore` | 构建/配置/工具变更 |
+| `refactor` | 重构（非功能、非修复） |
+| `perf` | 性能优化 |
+| `style` | 代码风格（格式化、缩进等） |
+| `test` | 测试相关 |
+
+### 免跟踪文件（.gitignore）
+
+| 路径 | 原因 |
+|------|------|
+| `config.json` | 包含 auth 哈希等敏感信息，提交 `config.json.example` 作为模板 |
+| `cache/` | 运行时自动生成的文件缓存 |
+| `logs/` | 运行时自动生成的日志文件 |
+| `__pycache__/` | Python 字节码缓存 |
+| `.DS_Store` / `Thumbs.db` | 操作系统无关文件 |
