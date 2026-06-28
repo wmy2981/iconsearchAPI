@@ -493,14 +493,14 @@ git commit -m "chore: bump version to 1.1.0"
 git tag -a v1.1.0 -m "v1.1.0"
 
 # 4. 推送
-git push origin master
+git push origin main
 git push origin v1.1.0
 ```
 
 ## 仓库信息
 
 - **远程仓库**: `git@github.com:wmy2981/iconsearchAPI.git`
-- **默认分支**: `master`
+- **默认分支**: `main`
 - **开源许可**: MIT（`LICENSE` 文件）
 - **自述文件**: `README.md`
 
@@ -508,8 +508,8 @@ git push origin v1.1.0
 
 ### 分支策略
 
-- `master` — 稳定发布分支，始终保持可部署状态
-- 功能开发直接在 master 上进行（单人项目），复杂功能可临时创建 feat/* 分支
+- `main` — 稳定发布分支，始终保持可部署状态
+- 功能开发直接在 `main` 上进行（单人项目），复杂功能可临时创建 feat/* 分支
 - Tag 标记所有正式版本
 
 ### 提交信息规范
