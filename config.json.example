@@ -1,0 +1,17 @@
+{
+    "severName": "IconSearchAPI",
+    "auth": "",
+    "skipAuth": true,
+    "logLevel": "INFO",
+    "linkBoost": [
+        {
+            "fast": "https://ghfast.top/<origin>",
+            "originDomain": "https://raw.githubusercontent.com"
+        }
+    ],
+    "default": {
+        "num": null,
+        "type": "*",
+        "sources": "*"
+    }
+}

@@ -1,0 +1,17 @@
+# 配置文件（含 auth 哈希等敏感信息）
+config.json
+
+# 自动生成的序列化缓存（运行时可重建）
+cache/
+
+# 按日期轮转的日志文件
+logs/
+*.log
+
+# Python 字节码缓存
+__pycache__/
+*.pyc
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
